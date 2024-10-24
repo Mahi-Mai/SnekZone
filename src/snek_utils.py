@@ -1,5 +1,26 @@
 from pathlib import Path
-from typing import List, Union
+from typing import List, Union, Generator
+
+
+def divide_chunks(lst: List, n: int) -> Generator:
+    """
+    SOURCE: https://www.geeksforgeeks.org/break-list-chunks-size-n-python/#
+    Break a list into a set of chunks of length n.
+    """
+    # looping till length l
+    for i in range(0, len(lst), n): 
+        yield lst[i:i + n]
+
+def split(a: List, n: int) -> List[List]:
+    """
+    SOURCE: https://stackoverflow.com/a/2135920
+    Break a list into n sets of roughly equal length.
+    """
+    k, m = divmod(len(a), n)
+    out = (a[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
+    out = list(out)
+    
+    return out
 
 def clean_path(pth: str) -> str:
     """
